@@ -3,13 +3,15 @@ import pandas as pd
 import numpy as np
 import pickle
 import os
+import folium
+from streamlit_folium import st_folium
 
 # Obtener la ruta del archivo .py
 ruta_actual = os.path.dirname(os.path.abspath(__file__))
 
 st.title("Despliegue modelo para prediccion de precios de Airbnb")
-
-
+#Descripción de la app
+st.write('Esta aplicación permite predecir el precio de un alojamiento de Airbnb en Madrid, España.')
 # Ruta del archivo pickle del modelo descomprimido
 ruta_pickle = 'model.pkl'
 ruta_pickle = os.path.join(ruta_actual, ruta_pickle)
@@ -39,7 +41,7 @@ x1 = st.sidebar.number_input('Latitud', min_value=40.332210, max_value=40.520140
 x2 = st.sidebar.number_input('Longitud', min_value=-3.835330, max_value=-3.552786, value=-3.835330)
 x3 = st.sidebar.number_input('Huéspedes', min_value=1.000000, max_value=16.000000, value=1.000000)
 x4 = st.sidebar.number_input('Dormitorios', min_value=1.000000	, max_value=18.000000, value=1.000000)
-x5 = st.sidebar.number_input('Camas', min_value=1.000000, max_value=100.0, value=40.000000)
+x5 = st.sidebar.number_input('Camas', min_value=1.000000, max_value=40.0, value=1.000000)
 x6 = st.sidebar.number_input('min noches', min_value=1.000000, max_value=1125.000000, value=1.000000)
 x7 = st.sidebar.number_input('max noches', min_value=1.000000, max_value=142365.000000, value=1.000000)
 x8 = st.sidebar.number_input('Puntaje', min_value=0, max_value=5, value=0)
@@ -66,3 +68,13 @@ predicciones = predecir(datos_entrada)
 # Mostrar el resultado de las predicciones
 mostrar_resultados(predicciones)
 
+# Crear mapa
+m = folium.Map(location=[40.416775, -3.703790], zoom_start=10)
+# Crear un marcador con los datos de entrada
+tooltip = "Precio estimado: " + str(predicciones[0][0]) + '€'
+folium.Marker([x1, x2], popup=tooltip).add_to(m)
+# Mostrar el mapa
+st_folium(m)
+#Se añade breve descripción de el alojamiento usando las variables de entrada
+st.subheader('Descripción del alojamiento')
+st.write('El alojamiento tiene ' + str(x3) + ' huéspedes, ' + str(x4) + ' dormitorios, ' + str(x5) + ' camas, ' + str(x6) + ' noches mínimas y ' + str(x7) + ' noches máximas.')
