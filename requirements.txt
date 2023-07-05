@@ -5,3 +5,5 @@ pydeck==0.8.0
 streamlit==1.16.0
 pickleshare==0.7.5
 sklearn==0.0
+streamlit-folium==0.12.0
+folium==0.14.0
