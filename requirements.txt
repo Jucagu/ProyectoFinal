@@ -4,3 +4,4 @@ plotly==5.8.0
 pydeck==0.8.0
 streamlit==1.16.0
 pickleshare==0.7.5
+sklearn==0.0
