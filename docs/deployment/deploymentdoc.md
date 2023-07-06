@@ -20,3 +20,4 @@
 - **Instrucciones de configuración:** (No se requieren configuraciones adicionales)
 - **Instrucciones de uso:** (Una vez abierta la interfaz, se seleccionan las caracteristicas para posteriormente ver una prediccion)
 - **Instrucciones de mantenimiento:** (Si la aplicacion no e utiliza en un plazo de una semana esta queda en reposo, por lo cual tocaria volver a desplegarla. Este proceso se realizaria mediante la aplicacion web)
+URL del modelo : https://proyectofinal-unal.streamlit.app/
